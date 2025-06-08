@@ -1,0 +1,15 @@
+{
+  "name": "focuscraft",
+  "version": "0.1.0",
+  "description": "An AI-Powered Pomodoro Timer",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

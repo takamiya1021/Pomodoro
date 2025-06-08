@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusCraft - AI Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Screen 1: Main Timer Screen -->
+        <div id="timer-screen" class="screen active">
+            <div class="timer-content">
+                <div class="progress-ring-container">
+                    <svg class="progress-ring" width="220" height="220">
+                        <circle class="progress-ring__background" stroke="#333A56" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+                        <circle class="progress-ring__circle" stroke="#00A9FF" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+                    </svg>
+                    <div id="time-display" class="time-display">25:00</div>
+                </div> 
+                <div id="task-display-container">
+                    <input type="text" id="task-input" placeholder="Enter your task...">
+                    <p id="current-task-text" class="current-task-text"></p>
+                </div>
+                <div class="timer-controls">
+                    <button id="start-pause-button" class="control-button">Start</button>
+                    <button id="reset-button" class="control-button secondary-button">Reset</button>
+                </div>
+            </div>
+            <button id="open-soundscape-button" class="soundscape-button">Soundscapes</button>
+        </div>
+
+        <!-- Screen 2: Session Summary Modal -->
+        <div id="session-summary-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">Session Complete! ✨</h2>
+                <div class="summary-card">
+                    <h3>AI Summary</h3>
+                    <p id="ai-summary-text">You made significant progress on drafting the project proposal.</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Suggested Next Action</h3>
+                    <p id="next-action-text">Take a 5-minute break, then start researching competitor data.</p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="start-break-button" class="control-button">Start 5-min Break</button>
+                    <button id="dismiss-summary-button" class="control-button secondary-button">Dismiss</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Soundscape Selection Modal -->
+        <div id="soundscape-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">Choose a Soundscape</h2>
+                <div id="soundscape-list" class="soundscape-list">
+                    <div class="soundscape-item" data-sound="deep-space">
+                        <span>🌌</span> Deep Space Silence <span class="playing-indicator"></span>
+                    </div>
+                    <div class="soundscape-item" data-sound="rainy-cafe">
+                        <span>☕</span> Rainy Cafe <span class="playing-indicator"></span>
+                    </div>
+                    <div class="soundscape-item" data-sound="forest-stream">
+                        <span>🌲</span> Forest Stream <span class="playing-indicator"></span>
+                    </div>
+                    <div class="soundscape-item" data-sound="lofi-beats">
+                        <span>🎧</span> Lo-fi Beats <span class="playing-indicator"></span>
+                    </div>
+                     <div class="soundscape-item" data-sound="none" data-selected="true">
+                        <span>🔇</span> No Sound <span class="playing-indicator playing"></span>
+                    </div>
+                </div>
+                <button id="close-soundscape-button" class="control-button">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
