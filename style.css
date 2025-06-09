@@ -261,3 +261,20 @@ body {
 .soundscape-item[data-selected="true"] .playing-indicator {
     background-color: #FFFFFF; /* White indicator for selected item */
 }
+
+/* Focus Quest Stats */
+.focus-quest-stats {
+    margin-top: 20px;
+    text-align: center;
+    color: #E0E0E0; /* Light text color, adjust as needed */
+}
+
+.focus-quest-stats p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.focus-quest-stats span {
+    font-weight: bold;
+    color: #00A9FF; /* Accent color, adjust as needed */
+}

@@ -29,9 +29,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMode = 'pomodoro'; // 'pomodoro', 'shortBreak', 'longBreak'
     let currentTask = '';
 
+    // Focus Quest Variables
+    let xp = 0;
+    let level = 1;
+    let xpToNextLevel = 100;
+
     const pomodoroDuration = 25 * 60;
     const shortBreakDuration = 5 * 60;
     // const longBreakDuration = 15 * 60; // For future implementation
+
+    function checkLevelUp() {
+        if (xp >= xpToNextLevel) {
+            level++;
+            xp -= xpToNextLevel;
+            xpToNextLevel = Math.floor(xpToNextLevel * 1.5); // Increase XP needed for next level
+            // alert(`Level Up! You are now Level ${level}!`); // Optional: Add a notification
+            updateFocusQuestDisplay();
+        }
+    }
+
+    function updateFocusQuestDisplay() {
+        const levelDisplay = document.getElementById('fq-level');
+        const xpDisplay = document.getElementById('fq-xp');
+        const xpToNextLevelDisplay = document.getElementById('fq-xp-next');
+        const currentQuestDisplay = document.getElementById('fq-current-quest');
+
+        if (levelDisplay) levelDisplay.textContent = level;
+        if (xpDisplay) xpDisplay.textContent = xp;
+        if (xpToNextLevelDisplay) xpToNextLevelDisplay.textContent = xpToNextLevel;
+        if (currentQuestDisplay) currentQuestDisplay.textContent = currentTask || 'クエスト未設定';
+    }
 
     function updateDisplay() {
         const minutes = Math.floor(timeLeft / 60);
@@ -40,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const progress = ((initialTime - timeLeft) / initialTime) * circumference;
         progressRing.style.strokeDashoffset = circumference - progress;
+        updateFocusQuestDisplay(); // Ensure FQ display is also updated if needed here
     }
 
     function startTimer() {
@@ -51,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentTaskText.textContent = `Task: ${currentTask}`;
                 taskInput.style.display = 'none';
                 currentTaskText.style.display = 'block';
+                updateFocusQuestDisplay(); // Update quest display when task is set
             }
             timerInterval = setInterval(() => {
                 timeLeft--;
@@ -102,6 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         if (currentMode === 'pomodoro') {
+            xp += 25; // Award 25 XP for completing a Pomodoro
+            checkLevelUp();
+            updateFocusQuestDisplay();
+
             aiSummaryText.textContent = summaries[Math.floor(Math.random() * summaries.length)];
             nextActionText.textContent = actions[Math.floor(Math.random() * actions.length)];
             sessionSummaryModal.classList.add('active');
@@ -171,4 +204,5 @@ document.addEventListener('DOMContentLoaded', () => {
         defaultSound.setAttribute('data-selected', 'true');
         defaultSound.querySelector('.playing-indicator').classList.add('playing');
     }
+    updateFocusQuestDisplay(); // Initialize Focus Quest display on load
 });
