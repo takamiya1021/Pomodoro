@@ -1,0 +1,20 @@
+{
+    "name": "pomodoro-app",
+    "version": "0.1.0",
+    "description": "A simple Pomodoro timer application.",
+    "main": "index.html",
+    "scripts": {
+      "start": "http-server ./ -p 8080 -o",
+      "dev": "http-server ./ -p 8080 -o -c-1"
+    },
+    "keywords": [
+      "pomodoro",
+      "timer"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "http-server": "^14.1.1"
+    }
+  }
+  
