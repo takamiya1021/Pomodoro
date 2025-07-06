@@ -1,0 +1,442 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%); /* modern soft gradient */
+    color: #333;
+    transition: background-color 0.5s ease;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+}
+
+/* Tabs Styling */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-link {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-link.active {
+    color: #007bff; /* Primary color for active tab */
+    border-bottom: 3px solid #007bff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Timer Display & Progress Bar */
+.timer-display-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 30px auto;
+}
+
+.progress-ring {
+    transform: rotate(-90deg); /* Start from the top */
+}
+
+.progress-ring__background {
+    stroke: #e6e6e6; /* Light grey for background track */
+}
+
+.progress-ring__circle {
+    stroke: #007bff; /* Primary color for progress */
+    stroke-linecap: round; /* Smooth edges for the progress line */
+    transition: stroke-dashoffset 0.35s linear, stroke 0.5s ease;
+}
+
+.timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#time-left {
+    font-size: 3.5em;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#timer-label {
+    font-size: 1.1em;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Controls */
+.controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.controls button:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+#reset-btn, #skip-btn {
+    background-color: #6c757d; /* Secondary button color */
+}
+
+#reset-btn:hover, #skip-btn:hover {
+    background-color: #545b62;
+}
+
+/* Motivational Quote */
+.quote-display {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    font-style: italic;
+    color: #555;
+    min-height: 50px; /* Ensure space even if quote is short */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* History Tab */
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 200px;
+    padding: 20px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.bar {
+    width: 30px;
+    background-color: #007bff;
+    margin: 0 5px;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: height 0.5s ease-out;
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: #555;
+}
+
+.bar-count {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Settings Tab */
+#settings h2, #history h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 500;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item label {
+    font-size: 0.95em;
+    color: #444;
+}
+
+.setting-item input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.setting-item input[type="number"], .setting-item select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 80px;
+}
+
+.setting-item select {
+    width: auto;
+    min-width: 120px;
+}
+
+/* Feedback Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.popup-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content button:hover {
+    background-color: #0056b3;
+}
+
+.popup-content button#task-completed-no {
+    background-color: #6c757d;
+}
+
+.popup-content button#task-completed-no:hover {
+    background-color: #545b62;
+}
+
+/* Body states for different timers */
+body.work-active {
+    background-color: #d1e7ff; /* Light blue for work */
+}
+
+body.break-active {
+    background-color: #d4edda; /* Light green for break */
+}
+
+.progress-ring__circle.work {
+    stroke: #007bff; /* Blue for work */
+}
+
+.progress-ring__circle.break {
+    stroke: #28a745; /* Green for break */
+}
+
+/* Stats Summary */
+.stats-summary {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container {
+    background-color: #2d2d2d;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .tab-link {
+    color: #b0b0b0;
+}
+
+body.dark-mode .tab-link.active {
+    color: #4dabf7;
+    border-bottom-color: #4dabf7;
+}
+
+body.dark-mode #time-left {
+    color: #e0e0e0;
+}
+
+body.dark-mode #timer-label {
+    color: #b0b0b0;
+}
+
+body.dark-mode .quote-display {
+    background-color: #3a3a3a;
+    color: #b0b0b0;
+}
+
+body.dark-mode .stats-summary {
+    background-color: #3a3a3a;
+}
+
+body.dark-mode .stat-value {
+    color: #4dabf7;
+}
+
+body.dark-mode .stat-label {
+    color: #888;
+}
+
+body.dark-mode .progress-ring__background {
+    stroke: #444;
+}
+
+body.dark-mode.work-active {
+    background-color: #1e2a3a;
+}
+
+body.dark-mode.break-active {
+    background-color: #1e3a2a;
+}
+
+/* Mobile Friendliness */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 15px 20px;
+    }
+
+    #time-left {
+        font-size: 3em;
+    }
+
+    .timer-display-container {
+        width: 180px;
+        height: 180px;
+    }
+
+
+
+    .controls button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .tab-link {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
+
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .setting-item label {
+        margin-bottom: 5px;
+    }
+
+    .stats-summary {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .stat-value {
+        font-size: 1.5em;
+    }
+
+    .setting-item input[type="number"], .setting-item select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
